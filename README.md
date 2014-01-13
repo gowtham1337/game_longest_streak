@@ -1,7 +1,7 @@
 game_longest_streak
 ===================
 
-A simple ruby fileAuto-commit to maintain longest streak
+A simple ruby file to maintain longest streak in Github.
 
 ###Usage
 Make sure you are able to push commits to your github account normally. Fork this repository to your github account and clone it locally. Then go into the folder and run this command.
