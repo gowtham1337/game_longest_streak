@@ -10,7 +10,7 @@ max_commits = 3
 ###### Program ######
 def create_commits(no_of_commits)
   no_of_commits.times do |x|
-    File.open('scratchpad', 'w+') {|f| f.write($curr_time.strftime("%S-#{rand(1000)}-#{x}")) }
+    File.open("#{File.expand_path( File.dirname( __FILE__ ))}/scratchpad", 'w+') {|f| f.write($curr_time.strftime("%S-#{rand(1000)}-#{x}")) }
     system("git commit -a -m 'Update Log'")
   end
 end
@@ -27,14 +27,14 @@ def update_log(no_of_commits)
     log[log.size-1] = "#{sno}, #{$curr_time.strftime("%e/%b/%Y-%I:%M:%S")}, #{nos+no_of_commits}"
   end
 
-  File.open("log", "w+") do |f|
+  File.open("File.expand_path( File.dirname( __FILE__ ))/log", "w+") do |f|
     f.puts(log)
   end
 end
 
 def update_cron(gap)
   next_time = $curr_time + gap.hours
-  File.open("cron", "w+") do |f|
+  File.open("File.expand_path( File.dirname( __FILE__ ))/cron", "w+") do |f|
     f.puts("#{next_time.strftime("%M %H %d %m")} * ruby #{Dir.pwd}/#{__FILE__}\n")
   end
   system("crontab cron")
@@ -44,8 +44,8 @@ $curr_time = Time.now
 
 no_of_commits = rand(Range.new(min_commits,max_commits))
 create_commits(no_of_commits)
-update_log(no_of_commits+1)
 update_cron(rand(Range.new(min_time,max_time)))
+update_log(no_of_commits+2)
 
 system("git commit -a -m 'Update Log'")
 system("git push origin master")
