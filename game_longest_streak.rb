@@ -27,14 +27,14 @@ def update_log(no_of_commits)
     log[log.size-1] = "#{sno}, #{$curr_time.strftime("%e/%b/%Y-%I:%M:%S")}, #{nos+no_of_commits}"
   end
 
-  File.open("File.expand_path( File.dirname( __FILE__ ))/log", "w+") do |f|
+  File.open("#{File.expand_path( File.dirname( __FILE__ ))}/log", "w+") do |f|
     f.puts(log)
   end
 end
 
 def update_cron(gap)
   next_time = $curr_time + gap.hours
-  File.open("File.expand_path( File.dirname( __FILE__ ))/cron", "w+") do |f|
+  File.open("#{File.expand_path( File.dirname( __FILE__ ))}/cron", "w+") do |f|
     f.puts("#{next_time.strftime("%M %H %d %m")} * ruby #{Dir.pwd}/#{__FILE__}\n")
   end
   system("crontab cron")
