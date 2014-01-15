@@ -16,7 +16,7 @@ def create_commits(no_of_commits)
 end
 
 def update_log(no_of_commits)
-  log = IO.readlines("log")
+  log = IO.readlines("#{File.expand_path( File.dirname( __FILE__ ))}/log")
   log[0] = "Total Commits: #{log.first.gsub('Total Commits: ', '').to_i + no_of_commits}"
   sno = log.last.split(',')[0].to_i
 
