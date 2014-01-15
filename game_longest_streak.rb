@@ -11,7 +11,7 @@ max_commits = 3
 def create_commits(no_of_commits)
   no_of_commits.times do |x|
     File.open("#{File.expand_path( File.dirname( __FILE__ ))}/scratchpad", 'w+') {|f| f.write($curr_time.strftime("%S-#{rand(1000)}-#{x}")) }
-    system("git commit --git-dir #{File.expand_path( File.dirname( __FILE__ ))}/.git -a -m 'Update Log'")
+    system("cd #{$curr_dir} git commit -a -m 'Update Log'")
   end
 end
 
@@ -41,11 +41,12 @@ def update_cron(gap)
 end
 
 $curr_time = Time.now
+$curr_dir = "#{File.expand_path( File.dirname( __FILE__ ))}"
 
 no_of_commits = rand(Range.new(min_commits,max_commits))
 create_commits(no_of_commits)
 update_cron(rand(Range.new(min_time,max_time)))
 update_log(no_of_commits+2)
 
-system("git --git-dir #{File.expand_path( File.dirname( __FILE__ ))}/.git commit -a -m 'Update Log'")
-system("git --git-dir #{File.expand_path( File.dirname( __FILE__ ))}/.git push origin master")
+system("cd #{$curr_dir} && git commit -a -m 'Update Log'")
+system("cd #{$curr_dir} && git push origin master")
