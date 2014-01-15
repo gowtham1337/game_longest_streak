@@ -32,8 +32,8 @@ def update_log(no_of_commits)
   end
 end
 
-def update_cron()
-  next_time = $curr_time + rand(Range.new(min_time,max_time)).hours
+def update_cron(gap)
+  next_time = $curr_time + gap.hours
   File.open("cron", "w+") do |f|
     f.puts("#{next_time.strftime("%M %H %d %m")} * ruby #{Dir.pwd}/#{__FILE__}")
   end
@@ -44,7 +44,7 @@ $curr_time = Time.now
 no_of_commits = rand(Range.new(min_commits,max_commits))
 create_commits(no_of_commits)
 update_log(no_of_commits+1)
-update_cron
+update_cron(rand(Range.new(min_time,max_time)))
 
 system("git commit -a -m 'Update Log'")
 system("git push origin master")
