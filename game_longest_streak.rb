@@ -10,13 +10,13 @@ max_commits = 3
 ###### Program ######
 def create_commits(no_of_commits)
   no_of_commits.times do |x|
-    File.open("#{File.expand_path( File.dirname( __FILE__ ))}/scratchpad", 'w+') {|f| f.write($curr_time.strftime("%S-#{rand(1000)}-#{x}")) }
-    system("cd #{$curr_dir} git commit -a -m 'Update Log'")
+    File.open("#{$curr_dir}/scratchpad", 'w+') {|f| f.write($curr_time.strftime("%S-#{rand(1000)}-#{x}")) }
+    system("cd #{$curr_dir} && git commit -a -m 'Update Log'")
   end
 end
 
 def update_log(no_of_commits)
-  log = IO.readlines("#{File.expand_path( File.dirname( __FILE__ ))}/log")
+  log = IO.readlines("#{$curr_dir}/log")
   log[0] = "Total Commits: #{log.first.gsub('Total Commits: ', '').to_i + no_of_commits}"
   sno = log.last.split(',')[0].to_i
 
@@ -27,15 +27,15 @@ def update_log(no_of_commits)
     log[log.size-1] = "#{sno}, #{$curr_time.strftime("%e/%b/%Y-%I:%M:%S")}, #{nos+no_of_commits}"
   end
 
-  File.open("#{File.expand_path( File.dirname( __FILE__ ))}/log", "w+") do |f|
+  File.open("#{$curr_dir}/log", "w+") do |f|
     f.puts(log)
   end
 end
 
 def update_cron(gap)
   next_time = $curr_time + gap.hours
-  File.open("#{File.expand_path( File.dirname( __FILE__ ))}/cron", "w+") do |f|
-    f.puts("#{next_time.strftime("%M %H %d %m")} * ruby #{Dir.pwd}/#{__FILE__}\n")
+  File.open("#{$curr_dir}/cron", "w+") do |f|
+    f.puts("#{next_time.strftime("%M %H %d %m")} * ruby #{$curr_dir}/#{__FILE__}\n")
   end
   system("cd #{$curr_dir} && crontab cron")
 end
