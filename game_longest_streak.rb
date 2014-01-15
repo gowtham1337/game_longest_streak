@@ -42,6 +42,8 @@ end
 
 $curr_time = Time.now
 
+system("cd #{File.expand_path( File.dirname( __FILE__ ))}")
+
 no_of_commits = rand(Range.new(min_commits,max_commits))
 create_commits(no_of_commits)
 update_cron(rand(Range.new(min_time,max_time)))
