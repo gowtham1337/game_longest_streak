@@ -16,7 +16,7 @@ File.open('scratchpad', 'w+') {|f| f.write(curr_time.strftime("%S-#{rand(1000)}-
 system("git commit -a -m 'Update Log'")
 end
 
-system("git push origin master")
+no_of_commits += 1
 
 log = IO.readlines("log")
 
@@ -35,3 +35,6 @@ end
 File.open("log", "w+") do |f|
   f.puts(log)
 end
+
+system("git commit -a -m 'Update Log'")
+system("git push origin master")
