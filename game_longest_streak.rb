@@ -35,17 +35,13 @@ end
 def update_cron(gap)
   next_time = $curr_time + gap.hours
   File.open("#{$curr_dir}/cron", "w+") do |f|
-    f.puts("#{next_time.strftime("%M %H %d %m")} * ruby #{$curr_dir}/#{File.basename(__FILE__)}\n")
+    f.puts("#{next_time.strftime("%M %H %d %m")} * /home/push_github/.rvm/rubies/ruby-2.1.0/bin/ruby #{$curr_dir}/#{File.basename(__FILE__)}\n")
   end
   system("cd #{$curr_dir} && crontab cron")
 end
 
 $curr_time = Time.now
 $curr_dir = "#{File.expand_path( File.dirname( __FILE__ ))}"
-
-File.open("#{$curr_dir}/cron_log", "w+") do |f|
-    f.puts("#{$curr_time.strftime("%M %H %d %m")}\n")
-end
 
 no_of_commits = rand(Range.new(min_commits,max_commits))
 create_commits(no_of_commits)
