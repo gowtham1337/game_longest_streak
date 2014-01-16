@@ -2,10 +2,10 @@ require 'date'
 require 'active_support/core_ext/numeric'
 
 ###### Config Options ######
-min_time    = 8
-max_time    = 11
+min_time    = 15
+max_time    = 18
 min_commits = 1
-max_commits = 3
+max_commits = 2
 
 ###### Program ######
 def create_commits(no_of_commits)
