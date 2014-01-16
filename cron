@@ -1,1 +1,1 @@
-00 03 17 01 * ruby /home/push_github/game_longest_streak/game_longest_streak.rb
+03 06 17 01 * /home/push_github/.rvm/rubies/ruby-2.1.0/bin/ruby /home/push_github/game_longest_streak/game_longest_streak.rb
