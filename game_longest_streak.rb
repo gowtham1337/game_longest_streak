@@ -35,7 +35,7 @@ end
 def update_cron(gap)
   next_time = $curr_time + gap.hours
   File.open("#{$curr_dir}/cron", "w+") do |f|
-    f.puts("#{next_time.strftime("%M %H %d %m")} * /home/push_github/.rvm/rubies/ruby-2.1.0/bin/ruby #{$curr_dir}/#{File.basename(__FILE__)}\n")
+    f.puts("#{next_time.strftime("%M %H %d %m")} * bash -c 'source /home/push_github/.rvm/scripts/rvm && /usr/bin/env ruby #{$curr_dir}/#{File.basename(__FILE__)}'\n")
   end
   system("cd #{$curr_dir} && crontab cron")
 end
