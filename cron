@@ -1,1 +1,1 @@
-58 19 15 02 * bash -c 'source /home/push_github/.rvm/scripts/rvm && /usr/bin/env ruby /home/push_github/game_longest_streak/game_longest_streak.rb'
+30 12 16 02 * bash -c 'source /home/push_github/.rvm/scripts/rvm && /usr/bin/env ruby /home/push_github/game_longest_streak/game_longest_streak.rb'
