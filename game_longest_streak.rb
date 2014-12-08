@@ -1,6 +1,6 @@
 require 'rubygems'
-require 'date'
 require 'active_support'
+require 'date'
 
 ###### Config Options ######
 min_time    = 15
