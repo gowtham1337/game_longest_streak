@@ -1,5 +1,5 @@
 require 'date'
-require 'active_support/core_ext/numeric'
+#require 'active_support/core_ext/numeric'
 
 ###### Config Options ######
 min_time    = 15
